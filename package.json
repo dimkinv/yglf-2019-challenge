@@ -1,0 +1,24 @@
+{
+  "name": "yglf-2019-challenge",
+  "version": "0.0.0",
+  "description": "Tessel project",
+  "main": "index.js",
+  "dependencies": {
+    "tessel": "^0.3.25"
+  },
+  "devDependencies": {
+    "t2-cli": "^0.1.21",
+    "typescript": "^3.2.2",
+    "usb": "1.5.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "debug": "yarn build && t2 run dist/"    
+  },
+  "repository": "",
+  "keywords": [
+    "Tessel"
+  ],
+  "license": "MIT",
+  "readme": "A bare bones Tessel 2 blinky script."
+}
