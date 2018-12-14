@@ -1,13 +1,25 @@
-// Import the interface to Tessel hardware
 import * as tessel from 'tessel';
+import * as servo from 'servo-pca9685';
 
-// Turn one of the LEDs on to start.
-tessel.led[2].on();
+const servoPortA = servo.use(tessel.port['A']);
 
-// Blink!
-setInterval(() => {
-  tessel.led[2].toggle();
-  tessel.led[3].toggle();
-}, 100);
+servoPortA.on('ready', () => {
+  servoPortA.configure(1, 0.05, 0.12, () => {
+    let position = 0;
+    // setTimeout(() => {
+    //   console.log('done');
+    // }, 5000);
+    setInterval(() => {
+      console.log('Position (in range 0-1):', position);
+      //  Set servo #1 to position pos.
 
-console.log("I'm blinking! (Press CTRL + C to stop)");
+      // Increment by 10% (~18 deg for a normal servo)
+      position += 0.1;
+      if (position > 1) {
+        position = 0; // Reset servo position
+      }
+
+      servoPortA.move(1, position);
+    }, 500); // Every 500 milliseconds
+  });
+});
